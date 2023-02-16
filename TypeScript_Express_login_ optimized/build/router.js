@@ -19,8 +19,6 @@ var checkLogin = function (req, res, next) {
     }
 };
 var router = (0, express_1.Router)();
-router.get('/', function () {
-});
 router.post('/login', function (req, res) {
     var password = req.body.password;
     var isLogin = req.session ? req.session.login : undefined;
@@ -36,12 +34,6 @@ router.post('/login', function (req, res) {
             res.json((0, util_1.getResponseData)(false, '登陆失败'));
         }
     }
-});
-router.get('/logout', function (req, res) {
-    if (req.session) {
-        req.session.login = undefined;
-    }
-    res.json((0, util_1.getResponseData)(true));
 });
 router.get('/getData', checkLogin, function (req, res) {
     var secret = 'secretKey'; //secretKey是git仓库中的secretKey

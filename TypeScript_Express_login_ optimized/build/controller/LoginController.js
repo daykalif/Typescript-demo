@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 var decorator_1 = require("./decorator");
+var util_1 = require("../utils/util");
 /**
  *  装饰器执行顺序由下到上
     先执行 ： @get 中传入 path
@@ -19,7 +20,15 @@ var decorator_1 = require("./decorator");
 var LoginController = /** @class */ (function () {
     function LoginController() {
     }
-    LoginController.prototype.login = function () { };
+    LoginController.prototype.login = function (req, res) {
+        res.send('Login is running');
+    };
+    LoginController.prototype.logout = function (req, res) {
+        if (req.session) {
+            req.session.login = undefined;
+        }
+        res.json((0, util_1.getResponseData)(true));
+    };
     LoginController.prototype.home = function (req, res) {
         var isLogin = req.session ? req.session.login : false;
         if (isLogin) {
@@ -32,9 +41,15 @@ var LoginController = /** @class */ (function () {
     __decorate([
         (0, decorator_1.get)('/login'),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
+        __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], LoginController.prototype, "login", null);
+    __decorate([
+        (0, decorator_1.get)('/logout'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], LoginController.prototype, "logout", null);
     __decorate([
         (0, decorator_1.get)('/'),
         __metadata("design:type", Function),

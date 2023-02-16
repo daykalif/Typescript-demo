@@ -112,3 +112,5 @@ concurrently 功能上面也讲了
 `npm i reflect-metadata --save`
 `tsc`
 `node ./build/controller/LoginController.js`
+`npm run test`
+`npm run dev`

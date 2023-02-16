@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.get = exports.controller = void 0;
+exports.get = exports.controller = exports.router = void 0;
+var express_1 = require("express");
+exports.router = (0, express_1.Router)();
 /**
  * 获取元数据:  获取 target 构造函数上每个 key的 元数据 'path'
  *
@@ -10,7 +12,11 @@ exports.get = exports.controller = void 0;
  */
 function controller(target) {
     for (var key in target.prototype) {
-        console.log(Reflect.getMetadata('path', target.prototype, key));
+        var path = Reflect.getMetadata('path', target.prototype, key);
+        var handler = target.prototype[key];
+        if (path) {
+            exports.router.get(path, handler);
+        }
     }
 }
 exports.controller = controller;
