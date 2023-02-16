@@ -19,22 +19,6 @@ var checkLogin = function (req, res, next) {
     }
 };
 var router = (0, express_1.Router)();
-router.post('/login', function (req, res) {
-    var password = req.body.password;
-    var isLogin = req.session ? req.session.login : undefined;
-    if (isLogin) {
-        res.json((0, util_1.getResponseData)(false, '已经登陆过'));
-    }
-    else {
-        if (password === '123' && req.session) {
-            req.session.login = true;
-            res.json((0, util_1.getResponseData)(true));
-        }
-        else {
-            res.json((0, util_1.getResponseData)(false, '登陆失败'));
-        }
-    }
-});
 router.get('/getData', checkLogin, function (req, res) {
     var secret = 'secretKey'; //secretKey是git仓库中的secretKey
     var url = "http://www.dell-lee.com/typescript/demo.html?sceret=".concat(secret);

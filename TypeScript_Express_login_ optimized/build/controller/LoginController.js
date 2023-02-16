@@ -21,7 +21,20 @@ var LoginController = /** @class */ (function () {
     function LoginController() {
     }
     LoginController.prototype.login = function (req, res) {
-        res.send('Login is running');
+        var password = req.body.password;
+        var isLogin = req.session ? req.session.login : undefined;
+        if (isLogin) {
+            res.json((0, util_1.getResponseData)(false, '已经登陆过'));
+        }
+        else {
+            if (password === '123' && req.session) {
+                req.session.login = true;
+                res.json((0, util_1.getResponseData)(true));
+            }
+            else {
+                res.json((0, util_1.getResponseData)(false, '登陆失败'));
+            }
+        }
     };
     LoginController.prototype.logout = function (req, res) {
         if (req.session) {
@@ -39,7 +52,7 @@ var LoginController = /** @class */ (function () {
         }
     };
     __decorate([
-        (0, decorator_1.get)('/login'),
+        (0, decorator_1.post)('/login'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
