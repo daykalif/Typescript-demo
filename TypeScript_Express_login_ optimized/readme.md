@@ -106,3 +106,9 @@ concurrently 功能上面也讲了
 ### 登陆
 
 `npm install cookie-session --save`
+
+---
+
+`npm i reflect-metadata --save`
+`tsc`
+`node ./build/controller/LoginController.js`
