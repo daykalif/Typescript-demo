@@ -1,10 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
-// import router from './router';
 
 // 使用controller生成的路由
 import './controller/LoginController';
+import './controller/CrowllerController';
 import { router } from './controller/decorator';
 
 const app = express();
