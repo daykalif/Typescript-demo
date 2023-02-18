@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { Request, Response, NextFunction } from "express";
 import fs from 'fs';
 import path from 'path';
-import { controller, get, post, use } from './decorator';
+import { controller, use, get } from '../decorator';
 import { getResponseData } from '../utils/util';
 import Crowller from '../utils/crowller';
 import Analyzer from '../utils/analyzer';
@@ -12,8 +12,8 @@ interface BodyRequest extends Request {
 }
 
 
-const checkLogin = (req: Request, res: Response, next: NextFunction) => {
-  const isLogin = req.session ? req.session.login : undefined;
+export const checkLogin = (req: Request, res: Response, next: NextFunction): void => {
+  const isLogin = !!(req.session ? req.session.login : false);
   if (isLogin) {
     next();
   } else {
@@ -22,11 +22,11 @@ const checkLogin = (req: Request, res: Response, next: NextFunction) => {
 }
 
 
-@controller
-class CrowllerController {
+@controller('/abc')
+export class CrowllerController {
   @get('/getData')
   @use(checkLogin)
-  getData(req: BodyRequest, res: Response) {
+  getData(req: BodyRequest, res: Response): void {
     const secret = 'secretKey';//secretKey是git仓库中的secretKey
     const url = `http://www.dell-lee.com/typescript/demo.html?sceret=${secret}`;
 
@@ -38,7 +38,7 @@ class CrowllerController {
 
   @get('/showData')
   @use(checkLogin)
-  showData(req: BodyRequest, res: Response) {
+  showData(req: BodyRequest, res: Response): void {
     try {
       const position = path.resolve(__dirname, '../../data/course.json');
       const result = fs.readFileSync(position, 'utf8');

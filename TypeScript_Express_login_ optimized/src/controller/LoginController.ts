@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { Request, Response } from "express";
-import { controller, get, post } from './decorator';
+import { controller, get, post } from '../decorator';
 import { getResponseData } from '../utils/util';
 
 interface BodyRequest extends Request {
@@ -13,12 +13,16 @@ interface BodyRequest extends Request {
     先执行 ： @get 中传入 path
     再执行 ： @controller 中能获取到 path 对应的值
  */
-@controller
-class LoginController {
+@controller('/')
+export class LoginController {
+  static isLogin(req: BodyRequest): boolean {
+    return !!(req.session ? req.session.login : false);
+  }
+
   @post('/login')
-  login(req: BodyRequest, res: Response) {
+  login(req: BodyRequest, res: Response): void {
     const { password } = req.body;
-    const isLogin = req.session ? req.session.login : undefined;
+    const isLogin = LoginController.isLogin(req);
     if (isLogin) {
       res.json(getResponseData(false, '已经登陆过'));
     } else {
@@ -32,7 +36,7 @@ class LoginController {
   }
 
   @get('/logout')
-  logout(req: BodyRequest, res: Response) {
+  logout(req: BodyRequest, res: Response): void {
     if (req.session) {
       req.session.login = undefined;
     }
@@ -40,8 +44,8 @@ class LoginController {
   }
 
   @get('/')
-  home(req: BodyRequest, res: Response) {
-    const isLogin = req.session ? req.session.login : false;
+  home(req: BodyRequest, res: Response): void {
+    const isLogin = LoginController.isLogin(req);
     if (isLogin) {
       res.send(`
         <html>

@@ -5,7 +5,7 @@ import cookieSession from 'cookie-session';
 // 使用controller生成的路由
 import './controller/LoginController';
 import './controller/CrowllerController';
-import { router } from './controller/decorator';
+import router from './router';
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));

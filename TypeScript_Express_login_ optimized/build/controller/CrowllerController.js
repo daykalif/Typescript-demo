@@ -12,15 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CrowllerController = exports.checkLogin = void 0;
 require("reflect-metadata");
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
-var decorator_1 = require("./decorator");
+var decorator_1 = require("../decorator");
 var util_1 = require("../utils/util");
 var crowller_1 = __importDefault(require("../utils/crowller"));
 var analyzer_1 = __importDefault(require("../utils/analyzer"));
 var checkLogin = function (req, res, next) {
-    var isLogin = req.session ? req.session.login : undefined;
+    var isLogin = !!(req.session ? req.session.login : false);
     if (isLogin) {
         next();
     }
@@ -28,6 +29,7 @@ var checkLogin = function (req, res, next) {
         res.json((0, util_1.getResponseData)(null, '请先登陆'));
     }
 };
+exports.checkLogin = checkLogin;
 var CrowllerController = /** @class */ (function () {
     function CrowllerController() {
     }
@@ -50,20 +52,21 @@ var CrowllerController = /** @class */ (function () {
     };
     __decorate([
         (0, decorator_1.get)('/getData'),
-        (0, decorator_1.use)(checkLogin),
+        (0, decorator_1.use)(exports.checkLogin),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], CrowllerController.prototype, "getData", null);
     __decorate([
         (0, decorator_1.get)('/showData'),
-        (0, decorator_1.use)(checkLogin),
+        (0, decorator_1.use)(exports.checkLogin),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], CrowllerController.prototype, "showData", null);
     CrowllerController = __decorate([
-        decorator_1.controller
+        (0, decorator_1.controller)('/abc')
     ], CrowllerController);
     return CrowllerController;
 }());
+exports.CrowllerController = CrowllerController;
