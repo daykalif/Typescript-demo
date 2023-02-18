@@ -14,6 +14,7 @@ interface BodyRequest extends Request {
 
 export const checkLogin = (req: Request, res: Response, next: NextFunction): void => {
   const isLogin = !!(req.session ? req.session.login : false);
+  console.log('check login middleware');
   if (isLogin) {
     next();
   } else {
@@ -22,10 +23,16 @@ export const checkLogin = (req: Request, res: Response, next: NextFunction): voi
 }
 
 
+export const test = (req: Request, res: Response, next: NextFunction): void => {
+  console.log('tset middleware');
+  next();
+}
+
 @controller('/abc')
 export class CrowllerController {
   @get('/getData')
   @use(checkLogin)
+  @use(test)
   getData(req: BodyRequest, res: Response): void {
     const secret = 'secretKey';//secretKey是git仓库中的secretKey
     const url = `http://www.dell-lee.com/typescript/demo.html?sceret=${secret}`;
