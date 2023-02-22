@@ -26,7 +26,7 @@ export const test = (req: Request, res: Response, next: NextFunction): void => {
   next();
 }
 
-@controller('/abc')
+@controller('/api')
 export class CrowllerController {
   @get('/getData')
   @use(checkLogin)

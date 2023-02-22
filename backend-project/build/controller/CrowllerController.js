@@ -70,7 +70,7 @@ var CrowllerController = /** @class */ (function () {
         __metadata("design:returntype", void 0)
     ], CrowllerController.prototype, "showData", null);
     CrowllerController = __decorate([
-        (0, decorator_1.controller)('/abc')
+        (0, decorator_1.controller)('/api')
     ], CrowllerController);
     return CrowllerController;
 }());
