@@ -1,44 +1,21 @@
 import React from 'react';
-import { Button, Form, Input } from 'antd';
-import './login.css';
+import { HashRouter, Route, Routes } from "react-router-dom";
+import LoginPage from './pages/Login';
+import HomePage from './pages/Home';
 
-interface Props {
 
+const App: React.FC = () => {
+  return (
+    <div>
+      <HashRouter>
+        <Routes>
+          {/* 注意，这里是 jsx 语法，需要配合标签, 传参也可以直接写为组件传参 */}
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/login" element={<LoginPage />}></Route>
+        </Routes>
+      </HashRouter>
+    </div>
+  )
 }
-
-const onFinish = (values: any) => {
-  console.log('Success:', values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo);
-};
-
-const App: React.FC = (props: Props) => (
-  <div className='login-page'>
-    <Form
-      name="basic"
-      labelCol={{ span: 6 }}
-      wrapperCol={{ span: 18 }}
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-    >
-      <Form.Item
-        label="密码"
-        name="password"
-        rules={[{ required: true, message: '请输入登陆密码！' }]}
-      >
-        <Input.Password />
-      </Form.Item>
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          登陆
-        </Button>
-      </Form.Item>
-    </Form>
-  </div>
-);
 
 export default App;

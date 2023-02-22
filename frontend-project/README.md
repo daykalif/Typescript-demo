@@ -44,3 +44,18 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+---
+
+项目创建：参考
+https://www.jianshu.com/p/f0448eb0a5b1
+
+创建项目：`npx create-react-app my-app --template typescript`
+引入 antd：`npm install antd --save`
+引入路由：`npm install react-router-dom --save`
+引入 axios：`cnpm install axios --save`
+
+package.json 中添加代理： "proxy": "http://localhost:7001",
+将前端请求的地址"http://localhost:3000/api/isLogin"代理到后端地址"http://localhost:7001/api/isLogin"
+
+引入 qs，用于 axios 表单提交：`cnpm install qs --save`
