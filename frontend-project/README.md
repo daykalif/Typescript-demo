@@ -59,3 +59,4 @@ package.json 中添加代理： "proxy": "http://localhost:7001",
 将前端请求的地址"http://localhost:3000/api/isLogin"代理到后端地址"http://localhost:7001/api/isLogin"
 
 引入 qs，用于 axios 表单提交：`cnpm install qs --save`
+引入 echarts：`cnpm install --save echarts-for-react`

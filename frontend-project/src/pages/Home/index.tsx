@@ -23,6 +23,24 @@ class HomePage extends Component {
         });
       }
     });
+
+    axios.get('/api/showData').then((res) => {
+      if (res.data?.data) {
+        console.log(res);
+      } else {
+
+      }
+    });
+  }
+
+  handleCrowllerClick = () => {
+    axios.get('/api/getData').then((res) => {
+      if (res.data?.data) {
+        console.log(res);
+      } else {
+        message.error('爬取失败');
+      }
+    });
   }
 
   handleLogoutClick = () => {
@@ -43,7 +61,7 @@ class HomePage extends Component {
       if (loaded) {
         return (
           <div className='home-page'>
-            <Button type='primary'>爬取数据</Button>
+            <Button type='primary' onClick={this.handleCrowllerClick}>爬取数据</Button>
             <Button type='primary'>展示数据</Button>
             <Button type='primary' onClick={this.handleLogoutClick}>退出</Button>
           </div>
