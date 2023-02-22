@@ -14,7 +14,6 @@ interface BodyRequest extends Request {
 
 export const checkLogin = (req: Request, res: Response, next: NextFunction): void => {
   const isLogin = !!(req.session ? req.session.login : false);
-  console.log('check login middleware');
   if (isLogin) {
     next();
   } else {
@@ -24,7 +23,6 @@ export const checkLogin = (req: Request, res: Response, next: NextFunction): voi
 
 
 export const test = (req: Request, res: Response, next: NextFunction): void => {
-  console.log('tset middleware');
   next();
 }
 

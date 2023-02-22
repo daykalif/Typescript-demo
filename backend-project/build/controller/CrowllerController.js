@@ -22,7 +22,6 @@ var crowller_1 = __importDefault(require("../utils/crowller"));
 var analyzer_1 = __importDefault(require("../utils/analyzer"));
 var checkLogin = function (req, res, next) {
     var isLogin = !!(req.session ? req.session.login : false);
-    console.log('check login middleware');
     if (isLogin) {
         next();
     }
@@ -32,7 +31,6 @@ var checkLogin = function (req, res, next) {
 };
 exports.checkLogin = checkLogin;
 var test = function (req, res, next) {
-    console.log('tset middleware');
     next();
 };
 exports.test = test;
